@@ -1,0 +1,6 @@
+@MatchPoint.API_HostAddress = http://localhost:5298
+
+GET {{MatchPoint.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
