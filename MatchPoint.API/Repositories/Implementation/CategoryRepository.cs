@@ -20,6 +20,16 @@ namespace MatchPoint.API.Repositories.Implementation
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public async Task<bool> DeleteAsync(Guid id)
+        {
+            var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
+            if(category is null)
+                return false;
+
+            _context.Categories.Remove(category);
+            return await _context.SaveChangesAsync() > 0;
+        }
+
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
             return await _context.Categories.ToListAsync();

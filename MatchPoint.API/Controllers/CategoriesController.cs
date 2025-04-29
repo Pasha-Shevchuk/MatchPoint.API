@@ -80,7 +80,15 @@ namespace MatchPoint.API.Controllers
             return Ok();
         }
 
+        [HttpDelete("{id:Guid}")]
+        public async Task<IActionResult> DeleteCategory([FromRoute] Guid id)
+        {
+            var deletedSuccess = await _categoryRepository.DeleteAsync(id);
+            if (!deletedSuccess)
+                return NotFound($"Category with id {id} not found");
+            return Ok();
 
+        }
     }
 }
 
