@@ -5,5 +5,6 @@ namespace MatchPoint.API.Repositories.Interface
     public interface ICategoryRepository
     {
         Task<bool> CreateAsync(Category category);
+        Task<IEnumerable<Category>> GetAllAsync();  
     }
 }

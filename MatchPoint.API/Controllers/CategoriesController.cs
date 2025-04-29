@@ -16,6 +16,21 @@ namespace MatchPoint.API.Controllers
             _categoryRepository = categoryRepository;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GatCategories()
+        {
+            var categories = await _categoryRepository.GetAllAsync();
+            if (categories is null)
+                return NotFound("No categories found");
+
+            // map
+            //var categoriesDto = categories.Select(c => new GetCategoryDto
+            //{
+            //    Name = c.Name,
+            //}).ToList();
+            return Ok(categories.Select(c => new {c.Id, c.Name, c.UrlHandle}));
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryRequestDto request)
         {
