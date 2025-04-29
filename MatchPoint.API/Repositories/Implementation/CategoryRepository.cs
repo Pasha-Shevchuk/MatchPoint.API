@@ -24,5 +24,23 @@ namespace MatchPoint.API.Repositories.Implementation
         {
             return await _context.Categories.ToListAsync();
         }
+
+        public async Task<Category?> GetByIdAsync(Guid id)
+        {
+            var category = await _context.Categories
+                .FirstOrDefaultAsync(c => c.Id == id);
+            return category;
+        }
+
+        public async Task<bool> UpdateAsync(Category category)
+        {
+            var categoryFromDB = await _context.Categories.FirstOrDefaultAsync(c => c.Id == category.Id);    
+            if(categoryFromDB is null)
+                return false;
+
+            _context.Entry(categoryFromDB).CurrentValues.SetValues(category);
+            return await _context.SaveChangesAsync() > 0;
+            
+        }
     }
 }

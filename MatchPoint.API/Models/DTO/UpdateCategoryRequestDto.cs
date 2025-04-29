@@ -1,8 +1,7 @@
 ﻿namespace MatchPoint.API.Models.DTO
 {
-    public class GetCategoryDto
+    public class UpdateCategoryRequestDto
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public string UrlHandle { get; set; }
     }

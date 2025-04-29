@@ -31,6 +31,22 @@ namespace MatchPoint.API.Controllers
             return Ok(categories.Select(c => new {c.Id, c.Name, c.UrlHandle}));
         }
 
+        [HttpGet("{id:Guid}")]
+        public async Task<IActionResult> GetCategory([FromRoute]  Guid id)
+        {
+            var category = await _categoryRepository.GetByIdAsync(id);
+            if (category is null)
+                return NotFound($"Category with id {id} not found");
+            // map
+            var categoryMap = new GetCategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name,
+                UrlHandle = category.UrlHandle
+            };
+            return Ok(categoryMap);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryRequestDto request)
         {
@@ -47,6 +63,22 @@ namespace MatchPoint.API.Controllers
             return Ok();
         }
 
+        [HttpPut("{id:Guid}")]
+        public async Task<IActionResult> UpdateCategory([FromRoute] Guid id, [FromBody] UpdateCategoryRequestDto request)
+        {
+            var category = new Category
+            {
+                Id = id,
+                Name = request.Name,
+                UrlHandle = request.UrlHandle
+            };
+
+            bool updatedSuccess = await _categoryRepository.UpdateAsync(category);
+            if(!updatedSuccess)
+                return NotFound($"Category with id {id} not found");
+
+            return Ok();
+        }
 
 
     }

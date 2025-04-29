@@ -6,5 +6,7 @@ namespace MatchPoint.API.Repositories.Interface
     {
         Task<bool> CreateAsync(Category category);
         Task<IEnumerable<Category>> GetAllAsync();  
+        Task<Category?> GetByIdAsync(Guid id);
+        Task<bool> UpdateAsync(Category category);
     }
 }
