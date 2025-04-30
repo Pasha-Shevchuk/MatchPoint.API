@@ -1,4 +1,4 @@
-﻿namespace MatchPoint.API.Models.DTO
+﻿namespace MatchPoint.API.Models.DTO.Category
 {
     public class CreateCategoryRequestDto
     {

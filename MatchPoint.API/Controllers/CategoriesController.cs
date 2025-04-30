@@ -1,6 +1,6 @@
 ﻿using MatchPoint.API.Data;
 using MatchPoint.API.Models.Domain;
-using MatchPoint.API.Models.DTO;
+using MatchPoint.API.Models.DTO.Category;
 using MatchPoint.API.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 
