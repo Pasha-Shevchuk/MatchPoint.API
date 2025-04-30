@@ -37,7 +37,7 @@ namespace MatchPoint.API.Repositories.Implementation
 
         public async Task<IEnumerable<BlogPost>> GetAllAsync()
         {
-            var posts = await _context.BlogPosts.ToListAsync();
+            var posts = await _context.BlogPosts.Include(x => x.Categories).ToListAsync();
             if (posts == null || !posts.Any())
                 return Enumerable.Empty<BlogPost>();
 

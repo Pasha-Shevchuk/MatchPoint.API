@@ -1,5 +1,6 @@
 ﻿using MatchPoint.API.Models.Domain;
 using MatchPoint.API.Models.DTO.BlogPost;
+using MatchPoint.API.Models.DTO.Category;
 using MatchPoint.API.Repositories.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,12 @@ namespace MatchPoint.API.Controllers
     public class BlogPostsController : ControllerBase
     {
         private readonly IBlogPostRepository _blogPostRepository;
-        public BlogPostsController(IBlogPostRepository blogPostRepository)
+        private readonly ICategoryRepository _categoryRepository;
+
+        public BlogPostsController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository)
         {
             _blogPostRepository = blogPostRepository;
+            _categoryRepository = categoryRepository;
         }
 
 
@@ -26,17 +30,23 @@ namespace MatchPoint.API.Controllers
             if (blogPosts == null || !blogPosts.Any())
                 return NotFound("No blog posts found");
 
-            var blogPostDto = blogPosts.Select(c => new GetBlogPostDto
+            var blogPostDto = blogPosts.Select(b => new GetBlogPostDto
             {
-                Id = c.Id,
-                Title = c.Title,
-                ShortDescription = c.ShortDescription,
-                Content = c.Content,
-                FeaturedImageUrl = c.FeaturedImageUrl,
-                UrlHandle = c.UrlHandle,
-                PublishedDate = c.PublishedDate,
-                Author = c.Author,
-                IsVisible = c.IsVisible
+                Id = b.Id,
+                Title = b.Title,
+                ShortDescription = b.ShortDescription,
+                Content = b.Content,
+                FeaturedImageUrl = b.FeaturedImageUrl,
+                UrlHandle = b.UrlHandle,
+                PublishedDate = b.PublishedDate,
+                Author = b.Author,
+                IsVisible = b.IsVisible,
+                Categories = b.Categories.Select(x => new GetCategoryDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle,
+                }).ToList()
             });
 
             return Ok(blogPostDto);
@@ -78,8 +88,17 @@ namespace MatchPoint.API.Controllers
                 UrlHandle = request.UrlHandle,
                 PublishedDate = request.PublishedDate,
                 Author = request.Author,
-                IsVisible = request.IsVisible
+                IsVisible = request.IsVisible,
+                Categories = new List<Category>()
             };
+
+            // fill categories for blog posts
+            foreach(var categoryGuid in request.Categories)
+            {
+                var existingCategory = await _categoryRepository.GetByIdAsync(categoryGuid);
+                if(existingCategory != null)
+                    blogpost.Categories.Add(existingCategory);
+            }
 
             var result =  await _blogPostRepository.CreateAsync(blogpost);
             if (result == false)
@@ -97,7 +116,14 @@ namespace MatchPoint.API.Controllers
                 UrlHandle = blogpost.UrlHandle,
                 PublishedDate = blogpost.PublishedDate,
                 Author = blogpost.Author,
-                IsVisible = blogpost.IsVisible
+                IsVisible = blogpost.IsVisible,
+
+                Categories = blogpost.Categories.Select(x => new GetCategoryDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle,
+                }).ToList()
             };
 
             return Ok(blodpostDto);

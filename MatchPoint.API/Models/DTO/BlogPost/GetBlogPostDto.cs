@@ -1,4 +1,6 @@
-﻿namespace MatchPoint.API.Models.DTO.BlogPost
+﻿using MatchPoint.API.Models.DTO.Category;
+
+namespace MatchPoint.API.Models.DTO.BlogPost
 {
     public class GetBlogPostDto
     {
@@ -11,5 +13,6 @@
         public DateTime PublishedDate { get; set; }
         public string Author { get; set; }
         public bool IsVisible { get; set; }
+        public List<GetCategoryDto> Categories { get; set; } = new List<GetCategoryDto>();
     }
 }
