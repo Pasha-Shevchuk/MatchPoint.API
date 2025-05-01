@@ -150,13 +150,47 @@ namespace MatchPoint.API.Controllers
                 UrlHandle = request.UrlHandle,
                 PublishedDate = request.PublishedDate,
                 Author = request.Author,
-                IsVisible = request.IsVisible
+                IsVisible = request.IsVisible,
+                Categories = new List<Category>()
             };
+
+            foreach(var categoryGuid in request.Categories)
+            {
+                var existingCategory = await _categoryRepository.GetByIdAsync(categoryGuid);   
+
+                if(existingCategory != null)
+                    blogPost.Categories.Add(existingCategory);
+            } 
+
+            // Call repository to update BlogPost Domain Model
 
             var result = await _blogPostRepository.UpdateAsync(blogPost);
             if (result == false)
                 return BadRequest("Failed to update blog post");
-            return Ok(request);
+
+
+            // convert blog post to dto
+            var blogPostDto = new GetBlogPostDto
+            {
+                Id = blogPost.Id,
+                Title = blogPost.Title,
+                ShortDescription = blogPost.ShortDescription,
+                Content = blogPost.Content,
+                FeaturedImageUrl = blogPost.FeaturedImageUrl,
+                UrlHandle = blogPost.UrlHandle,
+                PublishedDate = blogPost.PublishedDate,
+                Author = blogPost.Author,
+                IsVisible = blogPost.IsVisible,
+                Categories = blogPost.Categories.Select(x => new GetCategoryDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle,
+                }).ToList()
+            };
+
+
+            return Ok(blogPostDto);
 
         }
 

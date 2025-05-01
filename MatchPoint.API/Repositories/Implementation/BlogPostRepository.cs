@@ -55,22 +55,22 @@ namespace MatchPoint.API.Repositories.Implementation
         }
 
 
-        public async Task<bool> UpdateAsync(BlogPost category)
+        public async Task<bool> UpdateAsync(BlogPost blogPost)
         {
-            var existingPost = await _context.BlogPosts.FirstOrDefaultAsync(c => c.Id == category.Id);
+            var existingPost = await _context.BlogPosts.Include(x => x.Categories).FirstOrDefaultAsync(c => c.Id == blogPost.Id);
             if (existingPost == null)
                 return false;
-            existingPost.Title = category.Title;
-            existingPost.ShortDescription = category.ShortDescription;
-            existingPost.Content = category.Content;
-            existingPost.FeaturedImageUrl = category.FeaturedImageUrl;
-            existingPost.UrlHandle = category.UrlHandle;
-            existingPost.PublishedDate = category.PublishedDate;
-            existingPost.Author = category.Author;
-            existingPost.IsVisible = category.IsVisible;
-            _context.BlogPosts.Update(existingPost);
+            
+            // Update BlogPost
+            _context.Entry(existingPost).CurrentValues.SetValues(blogPost);
+
+            // Update Categories
+            existingPost.Categories = blogPost.Categories;
+
             var result = await _context.SaveChangesAsync();
+
             return result > 0;
+
         }
     }
 }
