@@ -70,7 +70,14 @@ namespace MatchPoint.API.Controllers
                 UrlHandle = catregory.UrlHandle,
                 PublishedDate = catregory.PublishedDate,
                 Author = catregory.Author,
-                IsVisible = catregory.IsVisible
+                IsVisible = catregory.IsVisible,
+                Categories = catregory.Categories?.Select(x => new GetCategoryDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle,
+                }).ToList() ?? new List<GetCategoryDto>()
+
             };
             return Ok(blogPostDto);
         }

@@ -47,9 +47,13 @@ namespace MatchPoint.API.Repositories.Implementation
 
         public async Task<BlogPost?> GetByIdAsync(Guid id)
         {
-            var post = await _context.BlogPosts.FirstOrDefaultAsync(c => c.Id == id);
+            var post = await _context.BlogPosts
+                .Include(x => x.Categories)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
             return post;
         }
+
 
         public async Task<bool> UpdateAsync(BlogPost category)
         {
