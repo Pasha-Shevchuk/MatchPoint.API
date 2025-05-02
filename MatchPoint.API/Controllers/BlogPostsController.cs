@@ -201,7 +201,7 @@ namespace MatchPoint.API.Controllers
             var result = await _blogPostRepository.DeleteAsync(id);
             if (result == false)
                 return BadRequest("Failed to delete blog post");
-            return Ok("Blog post deleted successfully");
+            return NoContent();
         }
 
     }
