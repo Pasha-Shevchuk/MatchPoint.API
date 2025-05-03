@@ -1,6 +1,7 @@
 ﻿using MatchPoint.API.Data;
 using MatchPoint.API.Models.Domain;
 using MatchPoint.API.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace MatchPoint.API.Repositories.Implementation
 {
@@ -18,6 +19,11 @@ namespace MatchPoint.API.Repositories.Implementation
             this.webHostEnvironment = webHostEnvironment;
             this.httpContextAccessor = httpContextAccessor;
             this._context = _context;
+        }
+
+        public async Task<IEnumerable<BlogImage>> GetAll()
+        {
+            return await _context.BlogImages.ToListAsync();
         }
 
         public async Task<BlogImage> Upload(IFormFile file, BlogImage blogImage)

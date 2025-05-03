@@ -16,6 +16,28 @@ namespace MatchPoint.API.Controllers
         {
             _imageRepository = imageRepository;
         }
+        // GET: {apibaseurl}/api/images
+        [HttpGet]
+        public async Task<IActionResult> GetAllImages()
+        {
+            var images = await _imageRepository.GetAll();
+
+            if (!images.Any() || images is null)
+                return NotFound();
+
+            // map to dto
+            var response = images.Select(i => new BlogImageDto
+            {
+                Id = i.Id,
+                FileName = i.FileName,
+                FileExtension = i.FileExtension,
+                Title = i.Title,
+                Url = i.Url,
+                DateCreated = i.DateCreated,
+            }).ToList();
+
+            return Ok(response);
+        }
 
 
         // POST: {apibaseurl}/api/images
