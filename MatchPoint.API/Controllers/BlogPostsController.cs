@@ -2,6 +2,7 @@
 using MatchPoint.API.Models.DTO.BlogPost;
 using MatchPoint.API.Models.DTO.Category;
 using MatchPoint.API.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -120,7 +121,8 @@ namespace MatchPoint.API.Controllers
 
         // post: model -> b
         [HttpPost]
-        public  async Task<IActionResult> CreateBlogPost([FromBody] CreateBlogPostDto request)
+        [Authorize(Roles = "Writer")]
+        public async Task<IActionResult> CreateBlogPost([FromBody] CreateBlogPostDto request)
         {
             var blogpost = new BlogPost
             {
@@ -174,6 +176,7 @@ namespace MatchPoint.API.Controllers
 
         // put: id, model -> b
         [HttpPut("{id}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> UpdateBlogPost(Guid id, [FromBody] UpdateBlogPostDto request)
         {
             var blogPost = new BlogPost
@@ -232,6 +235,7 @@ namespace MatchPoint.API.Controllers
 
         // delete: id -> b
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteBlogPost(Guid id)
         {
             var result = await _blogPostRepository.DeleteAsync(id);

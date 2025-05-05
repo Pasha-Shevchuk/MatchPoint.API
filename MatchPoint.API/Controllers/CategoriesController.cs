@@ -18,7 +18,8 @@ namespace MatchPoint.API.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles="Writer")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> GetCategories()
         {
             var categories = await _categoryRepository.GetAllAsync();
@@ -50,6 +51,7 @@ namespace MatchPoint.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryRequestDto request)
         {
             var category = new Category
@@ -66,6 +68,7 @@ namespace MatchPoint.API.Controllers
         }
 
         [HttpPut("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> UpdateCategory([FromRoute] Guid id, [FromBody] UpdateCategoryRequestDto request)
         {
             var category = new Category
@@ -82,7 +85,9 @@ namespace MatchPoint.API.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "Writer")]
         [HttpDelete("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteCategory([FromRoute] Guid id)
         {
             var deletedSuccess = await _categoryRepository.DeleteAsync(id);
