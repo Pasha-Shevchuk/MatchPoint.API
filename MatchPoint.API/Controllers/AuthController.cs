@@ -28,6 +28,36 @@ namespace MatchPoint.API.Controllers
         }
 
         [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
+        {
+            // check email
+            var identityUser = await userManager.FindByEmailAsync(request.Email);
+            if (identityUser is not null)
+            {
+                // check password
+                var checkPasswordResult = await userManager.CheckPasswordAsync(identityUser, request.Password);
+                if (checkPasswordResult)
+                {
+                    var roles = await userManager.GetRolesAsync(identityUser);
+
+                    // Create a Token and Response
+                    var response = new LoginResponseDto
+                    {
+                        Email = request.Email,
+                        Roles = roles.ToList(),
+                        Token = "HELLO"
+                    };
+
+                    return Ok(response);
+                }
+            }
+            ModelState.AddModelError("","incorrect email or password");
+
+            return ValidationProblem();
+        }
+
+        [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
         {
