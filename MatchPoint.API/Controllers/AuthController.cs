@@ -1,4 +1,5 @@
 ﻿using MatchPoint.API.Models.DTO.Auth;
+using MatchPoint.API.Repositories.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,13 @@ namespace MatchPoint.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly ITokenRepository _tokenRepository;
 
-        public AuthController(UserManager<IdentityUser> userManager)
+        public AuthController(UserManager<IdentityUser> userManager, ITokenRepository tokenRepository)
         {
-            this.userManager = userManager;
+            this._userManager = userManager;
+            this._tokenRepository = tokenRepository;
         }
 
         [HttpGet("hash")]
@@ -32,21 +35,21 @@ namespace MatchPoint.API.Controllers
         public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {
             // check email
-            var identityUser = await userManager.FindByEmailAsync(request.Email);
+            var identityUser = await _userManager.FindByEmailAsync(request.Email);
             if (identityUser is not null)
             {
                 // check password
-                var checkPasswordResult = await userManager.CheckPasswordAsync(identityUser, request.Password);
+                var checkPasswordResult = await _userManager.CheckPasswordAsync(identityUser, request.Password);
                 if (checkPasswordResult)
                 {
-                    var roles = await userManager.GetRolesAsync(identityUser);
+                    var roles = await _userManager.GetRolesAsync(identityUser);
 
                     // Create a Token and Response
                     var response = new LoginResponseDto
                     {
                         Email = request.Email,
                         Roles = roles.ToList(),
-                        Token = "HELLO"
+                        Token = _tokenRepository.CreateJwtToken(identityUser, roles.ToList())
                     };
 
                     return Ok(response);
@@ -67,11 +70,11 @@ namespace MatchPoint.API.Controllers
                 Email = request.Email?.Trim(),
             };
 
-            var result = await userManager.CreateAsync(user, request.Password);
+            var result = await _userManager.CreateAsync(user, request.Password);
 
             if (result.Succeeded)
             {
-                var roleResult = await userManager.AddToRoleAsync(user, "Reader");
+                var roleResult = await _userManager.AddToRoleAsync(user, "Reader");
                 if (roleResult.Succeeded)
                 {
                     return Ok();
