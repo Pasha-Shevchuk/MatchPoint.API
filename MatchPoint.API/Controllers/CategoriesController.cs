@@ -2,6 +2,7 @@
 using MatchPoint.API.Models.Domain;
 using MatchPoint.API.Models.DTO.Category;
 using MatchPoint.API.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MatchPoint.API.Controllers
@@ -17,7 +18,8 @@ namespace MatchPoint.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GatCategories()
+        [Authorize]
+        public async Task<IActionResult> GetCategories()
         {
             var categories = await _categoryRepository.GetAllAsync();
             if (categories is null)

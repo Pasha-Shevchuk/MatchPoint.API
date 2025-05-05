@@ -6,7 +6,7 @@ namespace MatchPoint.API.Data
 {
     public class AuthDbContext : IdentityDbContext
     {
-        public AuthDbContext(DbContextOptions options) : base(options)
+        public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)
         {
         }
 
@@ -41,17 +41,22 @@ namespace MatchPoint.API.Data
 
             // Create default user - ADMIN
             var adminUserId = "d07aec02-5470-4a03-9981-659d06ea808f";
-            var adminName_Email = "admin@matchpoint.com";
-            var admin = new IdentityUser()
+            var admin = new IdentityUser
             {
                 Id = adminUserId,
-                UserName = adminName_Email,
-                Email = adminName_Email,
-                NormalizedEmail = adminName_Email.ToUpper(),
-                NormalizedUserName = adminName_Email.ToUpper()
+                UserName = "admin@matchpoint.com",
+                NormalizedUserName = "ADMIN@MATCHPOINT.COM",
+                Email = "admin@matchpoint.com",
+                NormalizedEmail = "ADMIN@MATCHPOINT.COM",
+                EmailConfirmed = true,
+                PasswordHash = "AQAAAAIAAYagAAAAECOAJR9I9bPVylj7Tsgk9Gg3pJZmu+oQIk4pK244gIO2bv5rRohxFZtOpnZu50ndfg==",
+                SecurityStamp = "STATIC_SECURITY_STAMP",
+                ConcurrencyStamp = "STATIC_CONCURRENCY_STAMP",
+                LockoutEnabled = false,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false
             };
 
-            admin.PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(admin, "Administrator_Termoregulator");
 
             builder.Entity<IdentityUser>().HasData(admin);
 
