@@ -54,24 +54,25 @@ namespace MatchPoint.API.Controllers
 
 
         // get: id -> dto
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("{id:Guid}")]
         public async Task<IActionResult> GetBlogPostById(Guid id)
         {
-            var catregory = await _blogPostRepository.GetByIdAsync(id);
-            if(catregory == null)
+            var blogPost = await _blogPostRepository.GetByIdAsync(id);
+            if(blogPost == null)
                 return NotFound("Blog post not found");
             var blogPostDto = new GetBlogPostDto
             {
-                Id = catregory.Id,
-                Title = catregory.Title,
-                ShortDescription = catregory.ShortDescription,
-                Content = catregory.Content,
-                FeaturedImageUrl = catregory.FeaturedImageUrl,
-                UrlHandle = catregory.UrlHandle,
-                PublishedDate = catregory.PublishedDate,
-                Author = catregory.Author,
-                IsVisible = catregory.IsVisible,
-                Categories = catregory.Categories?.Select(x => new GetCategoryDto
+                Id = blogPost.Id,
+                Title = blogPost.Title,
+                ShortDescription = blogPost.ShortDescription,
+                Content = blogPost.Content,
+                FeaturedImageUrl = blogPost.FeaturedImageUrl,
+                UrlHandle = blogPost.UrlHandle,
+                PublishedDate = blogPost.PublishedDate,
+                Author = blogPost.Author,
+                IsVisible = blogPost.IsVisible,
+                Categories = blogPost.Categories?.Select(x => new GetCategoryDto
                 {
                     Id = x.Id,
                     Name = x.Name,
@@ -81,6 +82,41 @@ namespace MatchPoint.API.Controllers
             };
             return Ok(blogPostDto);
         }
+
+        // get: blobdost by urlhandle
+        [HttpGet]
+        [Route("{urlHandle}")]
+        public async Task<IActionResult> GetBlogPostByUrlHandle([FromRoute] string urlHandle)
+        {
+            // Get blogpost details
+            var blogPost = await _blogPostRepository.GetByUrlHandleAsync(urlHandle);
+            if (blogPost is null) 
+                return NotFound();
+
+            var blogPostDto = new GetBlogPostDto
+            {
+                Id = blogPost.Id,
+                Title = blogPost.Title,
+                ShortDescription = blogPost.ShortDescription,
+                Content = blogPost.Content,
+                FeaturedImageUrl = blogPost.FeaturedImageUrl,
+                UrlHandle = blogPost.UrlHandle,
+                PublishedDate = blogPost.PublishedDate,
+                Author = blogPost.Author,
+                IsVisible = blogPost.IsVisible,
+                Categories = blogPost.Categories?.Select(x => new GetCategoryDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle,
+                }).ToList() ?? new List<GetCategoryDto>()
+
+            };
+
+            return Ok(blogPostDto);
+        }
+
+
 
         // post: model -> b
         [HttpPost]

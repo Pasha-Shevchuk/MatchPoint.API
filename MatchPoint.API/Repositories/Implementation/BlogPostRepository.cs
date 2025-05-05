@@ -54,6 +54,14 @@ namespace MatchPoint.API.Repositories.Implementation
             return post;
         }
 
+        public async Task<BlogPost?> GetByUrlHandleAsync(string urlHandle)
+        {
+            var post = await _context.BlogPosts
+              .Include(x => x.Categories)
+              .FirstOrDefaultAsync(c => c.UrlHandle == urlHandle);
+
+            return post;
+        }
 
         public async Task<bool> UpdateAsync(BlogPost blogPost)
         {
