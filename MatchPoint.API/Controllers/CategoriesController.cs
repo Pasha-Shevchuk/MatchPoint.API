@@ -18,18 +18,13 @@ namespace MatchPoint.API.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Writer")]
-        public async Task<IActionResult> GetCategories([FromQuery] string? query)
+        //[Authorize(Roles = "Writer")]
+        public async Task<IActionResult> GetCategories([FromQuery] string? query, [FromQuery] string? sortBy, [FromQuery] string? sortDirection)
         {
-            var categories = await _categoryRepository.GetAllAsync(query);
+            var categories = await _categoryRepository.GetAllAsync(query, sortBy,sortDirection);
             if (categories is null)
                 return NotFound("No categories found");
 
-            // map
-            //var categoriesDto = categories.Select(c => new GetCategoryDto
-            //{
-            //    Name = c.Name,
-            //}).ToList();
             return Ok(categories.Select(c => new {c.Id, c.Name, c.UrlHandle}));
         }
 

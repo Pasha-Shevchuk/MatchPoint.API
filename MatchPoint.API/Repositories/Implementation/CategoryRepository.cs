@@ -30,7 +30,7 @@ namespace MatchPoint.API.Repositories.Implementation
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<IEnumerable<Category>> GetAllAsync(string? query = null)
+        public async Task<IEnumerable<Category>> GetAllAsync(string? query = null, string? sortBy = null, string? sortDirection = null)
         {
             // query the database
             var categories = _context.Categories.AsQueryable();
@@ -42,6 +42,25 @@ namespace MatchPoint.API.Repositories.Implementation
             }
 
             // Sorting
+            if(!string.IsNullOrEmpty(sortBy))
+            {
+                if(string.Equals(sortBy, "Name", StringComparison.OrdinalIgnoreCase))
+                {
+                    var isAsc = string.Equals(sortDirection, "asc", StringComparison.OrdinalIgnoreCase);
+                    if(isAsc)
+                        categories = categories.OrderBy(x => x.Name);
+                    else
+                        categories = categories.OrderByDescending(x => x.Name);
+                }
+                if (string.Equals(sortBy, "UrlHandle", StringComparison.OrdinalIgnoreCase))
+                {
+                    var isAsc = string.Equals(sortDirection, "asc", StringComparison.OrdinalIgnoreCase);
+                    if (isAsc)
+                        categories = categories.OrderBy(x => x.UrlHandle);
+                    else
+                        categories = categories.OrderByDescending(x => x.UrlHandle);
+                }
+            }
 
             // Pagination
 
