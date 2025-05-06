@@ -30,9 +30,23 @@ namespace MatchPoint.API.Repositories.Implementation
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<IEnumerable<Category>> GetAllAsync()
+        public async Task<IEnumerable<Category>> GetAllAsync(string? query = null)
         {
-            return await _context.Categories.ToListAsync();
+            // query the database
+            var categories = _context.Categories.AsQueryable();
+
+            // Filtering
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                categories = categories.Where(x => x.Name.Contains(query));
+            }
+
+            // Sorting
+
+            // Pagination
+
+
+            return await categories.ToListAsync();
         }
 
         public async Task<Category?> GetByIdAsync(Guid id)

@@ -18,11 +18,9 @@ namespace MatchPoint.API.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles="Writer")]
-        [Authorize(Roles = "Writer")]
-        public async Task<IActionResult> GetCategories()
+        public async Task<IActionResult> GetCategories([FromQuery] string? query)
         {
-            var categories = await _categoryRepository.GetAllAsync();
+            var categories = await _categoryRepository.GetAllAsync(query);
             if (categories is null)
                 return NotFound("No categories found");
 
@@ -85,7 +83,6 @@ namespace MatchPoint.API.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Writer")]
         [HttpDelete("{id:Guid}")]
         [Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteCategory([FromRoute] Guid id)
