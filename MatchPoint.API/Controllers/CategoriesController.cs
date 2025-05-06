@@ -18,6 +18,7 @@ namespace MatchPoint.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> GetCategories([FromQuery] string? query)
         {
             var categories = await _categoryRepository.GetAllAsync(query);
@@ -33,6 +34,7 @@ namespace MatchPoint.API.Controllers
         }
 
         [HttpGet("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> GetCategory([FromRoute]  Guid id)
         {
             var category = await _categoryRepository.GetByIdAsync(id);
