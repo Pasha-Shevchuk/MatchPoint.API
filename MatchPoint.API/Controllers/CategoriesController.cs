@@ -18,7 +18,7 @@ namespace MatchPoint.API.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Writer")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> GetCategories([FromQuery] string? query, [FromQuery] string? sortBy, [FromQuery] string? sortDirection)
         {
             var categories = await _categoryRepository.GetAllAsync(query, sortBy,sortDirection);
