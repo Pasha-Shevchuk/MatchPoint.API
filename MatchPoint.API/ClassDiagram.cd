@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MatchPoint.API.Controllers.AuthController">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAEACAAAAAAAAAAAAAAIBAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Controllers\AuthController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Controllers.BlogPostsController">
+    <Position X="2.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAEAAAQAAAEAAgAAAAAAAAAACEAAAAAAAEAA=</HashCode>
+      <FileName>Controllers\BlogPostsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Controllers.CategoriesController">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAICAAAAAAAAAAAAAQAAgAACAAAAAAAAAAg=</HashCode>
+      <FileName>Controllers\CategoriesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Controllers.ImagesController">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAACAAAAAAAAAAgIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\ImagesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Data.ApplicationDbContext">
+    <Position X="4" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAYAAA=</HashCode>
+      <FileName>Data\ApplicationDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Data.AuthDbContext">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\AuthDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Models.Domain.BlogImage">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAEAAAAAAAAAAAAAAAAAACAEEAABAAAA=</HashCode>
+      <FileName>Models\Domain\BlogImage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Models.Domain.BlogPost">
+    <Position X="5.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAggAEEAAgAAAQAAAAAAAEAIAAgAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\BlogPost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Models.Domain.Category">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Models\Domain\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Models.DTO.Auth.LoginRequestDto">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DTO\Auth\LoginRequestDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Models.DTO.Auth.LoginResponseDto">
+    <Position X="7.75" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAgAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Models\DTO\Auth\LoginResponseDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Models.DTO.Auth.RegisterRequestDto">
+    <Position X="9.75" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DTO\Auth\RegisterRequestDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Models.DTO.BlogPost.CreateBlogPostDto">
+    <Position X="9.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAggAEEAAgAAAQAAAAAAAEAIAAgAAAAAAAAA=</HashCode>
+      <FileName>Models\DTO\BlogPost\CreateBlogPostDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Models.DTO.BlogPost.GetBlogPostDto">
+    <Position X="7.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAggAEEAAgAAAQAAAAAAAEAIAAgAAAAAAAAA=</HashCode>
+      <FileName>Models\DTO\BlogPost\GetBlogPostDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Models.DTO.BlogPost.UpdateBlogPostDto">
+    <Position X="11" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAggAEEAAgAAAQAAAAAAAEAIAAgAAAAAAAAA=</HashCode>
+      <FileName>Models\DTO\BlogPost\UpdateBlogPostDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Models.DTO.Category.CreateCategoryRequestDto">
+    <Position X="11.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DTO\Category\CreateCategoryRequestDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Models.DTO.Category.CreateCategoryResponseDto">
+    <Position X="14" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DTO\Category\CreateCategoryResponseDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Models.DTO.Category.GetCategoryDto">
+    <Position X="11.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DTO\Category\GetCategoryDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Models.DTO.Category.UpdateCategoryRequestDto">
+    <Position X="13.5" Y="2" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DTO\Category\UpdateCategoryRequestDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Models.DTO.Image.BlogImageDto">
+    <Position X="12.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAEAAAAAAAAAAAAAAAAAACAEEAABAAAA=</HashCode>
+      <FileName>Models\DTO\Image\BlogImageDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MatchPoint.API.Repositories.Implementation.BlogPostRepository" BaseTypeListCollapsed="true">
+    <Position X="4" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAABAAAAABAAAAAAAAAAAAAAAAAgAAAAAAIAAIIA=</HashCode>
+      <FileName>Repositories\Implementation\BlogPostRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MatchPoint.API.Repositories.Implementation.CategoryRepository" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAABAAAAAAAAAAAAAAAAAgAAAAAAIAAIIA=</HashCode>
+      <FileName>Repositories\Implementation\CategoryRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.182" Collapsed="true" />
+  </Class>
+  <Class Name="MatchPoint.API.Repositories.Implementation.ImageRepository" BaseTypeListCollapsed="true">
+    <Position X="4" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAggAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Repositories\Implementation\ImageRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MatchPoint.API.Repositories.Implementation.TokenRepository" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\Implementation\TokenRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="MatchPoint.API.Repositories.Interface.IBlogPostRepository">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAABAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAIAAIIA=</HashCode>
+      <FileName>Repositories\Interface\IBlogPostRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MatchPoint.API.Repositories.Interface.ICategoryRepository">
+    <Position X="2.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAIAAIIA=</HashCode>
+      <FileName>Repositories\Interface\ICategoryRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MatchPoint.API.Repositories.Interface.IImageRepository">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Repositories\Interface\IImageRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MatchPoint.API.Repositories.Interface.ITokenRepository">
+    <Position X="2.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\Interface\ITokenRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
